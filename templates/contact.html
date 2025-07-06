@@ -1,8 +1,118 @@
-{%extends 'base.html'%}
-{%block content%}
-<h1>Contact</h1>
-<p>Email: manikanta.boyi@gmail.com</p>
-<p>GitHub: <a href="https://github.com/manikanta-boyi">Manikanta Boyi</a></p>
-<p>LinkidIn: <a href="https://www.linkedin.com/in/manikanta-boyi-flask-dev">Manikanta Boyi</a></p>
+{% extends 'base.html' %}
 
-{%endblock%}
+{% block content %}
+<div class="text-center py-12 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-5xl font-extrabold text-gray-900 mb-6 animate-fade-in">Get in Touch</h1>
+
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <p class="text-xl text-gray-700 leading-relaxed mb-6 animate-fade-in-delay-1">
+            I'm always open to new opportunities, collaborations, and interesting discussions. Feel free to reach out to me through any of the channels below!
+        </p>
+
+        <div class="space-y-4 mb-8">
+            <p class="text-lg text-gray-800 animate-fade-in-delay-2">
+                <strong class="font-semibold text-blue-700">Email:</strong>
+                <a href="mailto:manikanta.boyi@gmail.com" class="text-blue-600 hover:text-blue-800 underline ml-2">manikanta.boyi@gmail.com</a>
+            </p>
+            <p class="text-lg text-gray-800 animate-fade-in-delay-3">
+                <strong class="font-semibold text-blue-700">GitHub:</strong>
+                <a href="https://github.com/manikanta-boyi" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline ml-2">Manikanta Boyi</a>
+            </p>
+            <p class="text-lg text-gray-800 animate-fade-in-delay-4">
+                <strong class="font-semibold text-blue-700">LinkedIn:</strong>
+                <a href="https://www.linkedin.com/in/manikanta-boyi-flask-dev" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline ml-2">Manikanta Boyi</a>
+            </p>
+        </div>
+
+        <h2 class="text-3xl font-bold text-gray-900 mb-6 mt-10 animate-fade-in-delay-5">Send Me a Message</h2>
+        
+        <form method="POST" class="space-y-6 text-left">
+            
+            {{ form.hidden_tag() }}
+
+            <div>
+               
+                {{ form.name.label(class="block text-sm font-medium text-gray-700") }}
+                
+                {{ form.name(class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm", placeholder="Your Name") }}
+                
+                {% if form.name.errors %}
+                    <ul class="text-red-600 text-xs mt-1 list-disc list-inside">
+                        {% for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+               
+                {{ form.email.label(class="block text-sm font-medium text-gray-700") }}
+               
+                {{ form.email(class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm", placeholder="your.email@example.com") }}
+               
+                {% if form.email.errors %}
+                    <ul class="text-red-600 text-xs mt-1 list-disc list-inside">
+                        {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+               
+                {{ form.message.label(class="block text-sm font-medium text-gray-700") }}
+                
+                {{ form.message(class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm", placeholder="Your message...", rows="5") }}
+                
+                {% if form.message.errors %}
+                    <ul class="text-red-600 text-xs mt-1 list-disc list-inside">
+                        {% for error in form.message.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div>
+                
+                {{ form.submit(class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Basic animation for a subtle fade-in effect */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .animate-fade-in-delay-1 {
+        animation: fadeIn 0.8s ease-out 0.2s forwards;
+        opacity: 0; /* Start hidden */
+    }
+    .animate-fade-in-delay-2 {
+        animation: fadeIn 0.8s ease-out 0.4s forwards;
+        opacity: 0; /* Start hidden */
+    }
+    .animate-fade-in-delay-3 {
+        animation: fadeIn 0.8s ease-out 0.6s forwards;
+        opacity: 0; /* Start hidden */
+    }
+    .animate-fade-in-delay-4 {
+        animation: fadeIn 0.8s ease-out 0.8s forwards;
+        opacity: 0; /* Start hidden */
+    }
+    .animate-fade-in-delay-5 {
+        animation: fadeIn 0.8s ease-out 1.0s forwards;
+        opacity: 0; /* Start hidden */
+    }
+</style>
+{% endblock %}

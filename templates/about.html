@@ -1,7 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>About Me</h1>
-<p>I am a self-taught backend developer passionate about Flask and Python.</p>
-<p>I enjoy building apps that solve real-world problems.</p>
+<div class="text-center py-12 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-5xl font-extrabold text-gray-900 mb-6 animate-fade-in">About Me</h1>
+    <div class="max-w-3xl mx-auto">
+        <p class="text-xl text-gray-700 leading-relaxed mb-4 animate-fade-in-delay-1">
+            Hello there! I'm Manikanta, a passionate and dedicated self-taught backend developer. My journey into the world of web development has been driven by a strong curiosity and a desire to build robust, efficient, and scalable applications.
+        </p>
+        <p class="text-xl text-gray-700 leading-relaxed mb-4 animate-fade-in-delay-2">
+            My primary focus is on Python and Flask, where I enjoy crafting elegant solutions to complex problems. I thrive on the challenge of transforming ideas into functional, real-world applications that make a tangible impact.
+        </p>
+        <p class="text-xl text-gray-700 leading-relaxed animate-fade-in-delay-3">
+            Beyond coding, I'm constantly exploring new technologies and methodologies to refine my skills and stay at the forefront of the ever-evolving tech landscape. I believe in continuous learning and the power of well-structured, maintainable code.
+        </p>
+    </div>
+    <div class="mt-10">
+        <a href="/contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mr-4">Get in Touch</a>
+        <a href="/projects" class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">View My Projects</a>
+    </div>
+</div>
+
+<style>
+    /* Basic animation for a subtle fade-in effect */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .animate-fade-in-delay-1 {
+        animation: fadeIn 0.8s ease-out 0.2s forwards;
+        opacity: 0; /* Start hidden */
+    }
+
+    .animate-fade-in-delay-2 {
+        animation: fadeIn 0.8s ease-out 0.4s forwards;
+        opacity: 0; /* Start hidden */
+    }
+
+    .animate-fade-in-delay-3 {
+        animation: fadeIn 0.8s ease-out 0.6s forwards;
+        opacity: 0; /* Start hidden */
+    }
+</style>
 {% endblock %}

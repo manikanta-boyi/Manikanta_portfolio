@@ -1,6 +1,20 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request,redirect,url_for,flash
+from flask_mail import Mail, Message
+import os
+from forms import ContactForm
 
 app = Flask(__name__)
+mail = Mail(app)
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False # Set to False for TLS, True for SSL (usually port 465)
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
+app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('EMAIL_USER')
 
 
 projects = [
@@ -42,9 +56,35 @@ def project_list():
 def about():
     return render_template('about.html')
 
-@app.route('/contact')
+@app.route('/contact',methods=['GET','POST'])
 def contact():
-    return render_template('contact.html')
+    form = ContactForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        user_msg = form.message.data
+
+        msg = Message(subject=f"New Portfolio Contact from {name} ({email})",
+                      recipients=[os.environ.get('EMAIL_USER')],
+                      html=f"""
+                        <p>You have received a new message from your portfolio contact form:</p>
+                        <p><strong>Name:</strong> {name}</p>
+                        <p><strong>Email:</strong> {email}</p>
+                        <p><strong>Message:</strong></p>
+                        <p>{user_msg}</p>""")
+        try:
+            print(f"Attempting to send email from: {app.config.get('MAIL_USERNAME')}")
+            print(f"Using server: {app.config.get('MAIL_SERVER')}:{app.config.get('MAIL_PORT')}")
+            # DO NOT print app.config.get('MAIL_PASSWORD') in production, only for debugging!
+            # print(f"Using password: {app.config.get('MAIL_PASSWORD')}")
+            mail.send(msg)
+            flash('Meassage sent successfully','success')
+            return redirect(url_for('contact'))
+        except Exception as e:
+            print(f'Message not sent {e}')
+            flash('Message sending failed','error')
+            return redirect(url_for('contact'))
+    return render_template('contact.html',form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
