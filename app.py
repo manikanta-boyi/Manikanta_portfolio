@@ -5,17 +5,18 @@ from forms import ContactForm
 
 
 app = Flask(__name__)
-mail = Mail(app)
+
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False # Set to False for TLS, True for SSL (usually port 465)
 app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
 app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('EMAIL_USER')
+
+mail = Mail(app) # Initialize Flask-Mail
 
 
 projects = [
