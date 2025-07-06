@@ -1,6 +1,6 @@
 Flask==2.3.2
 Flask-Mail==0.9.1
-Flask-WTF==1.1.1
+Flask-WTF==1.2.0  # <--- Updated this line
 WTForms==3.0.1
 python-dotenv==1.0.0
 gunicorn==20.1.0

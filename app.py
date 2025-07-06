@@ -3,6 +3,7 @@ from flask_mail import Mail, Message
 import os
 from forms import ContactForm
 
+
 app = Flask(__name__)
 mail = Mail(app)
 
